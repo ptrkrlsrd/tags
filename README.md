@@ -1,2 +1,2 @@
 # tags
-## A Go package for transforming JSON-data on input
+## A Go package for transforming JSON-data from tags
