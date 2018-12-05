@@ -16,6 +16,6 @@ const data = `
 
 
 type Person struct {
-  Name string `json:"name",tags:"persons.0?.name"`
+  Name string `json:"name" tags:"persons.0?.name"`
 }
 ```
