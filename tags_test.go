@@ -14,14 +14,14 @@ const personData = `
 `
 
 type Person struct {
-	Name   string `json:"name" tags:"persons.[0].name"`
-	Age    int    `json:"age" tags:"persons.[0].age"`
+	Name   string `json:"name" select:"persons.[0].name"`
+	Age    int    `json:"age" select:"persons.[0].age"`
 	NotAge int
 }
 
-func TestParse(t *testing.T) {
+func TestSelect(t *testing.T) {
 	ty := reflect.TypeOf(Person{})
-	val, err := Parse(ty, personData)
+	val, err := Select(ty, personData)
 	person := val.Interface().(*Person)
 
 	if err != nil {
@@ -38,9 +38,9 @@ func TestParse(t *testing.T) {
 }
 
 type Car struct {
-	Name  string `json:"name" tags:"cars.[0].name"`
-	Brand string `json:"brand" tags:"cars.[0].brand"`
-	Gears int    `json:"gears" tags:"cars.[1].gears"`
+	Name  string `json:"name" select:"cars.[0].name"`
+	Brand string `json:"brand" select:"cars.[0].brand"`
+	Gears int    `json:"gears" select:"cars.[1].gears"`
 }
 
 const carData = `
@@ -51,9 +51,9 @@ const carData = `
 }
 `
 
-func TestParseFail(t *testing.T) {
+func TestSelectFail(t *testing.T) {
 	ty := reflect.TypeOf(Car{})
-	_, err := Parse(ty, personData)
+	_, err := Select(ty, personData)
 
 	if err == nil {
 		t.Fail()

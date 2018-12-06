@@ -6,8 +6,8 @@ import (
 	"github.com/elgs/gojq"
 )
 
-// TagName is the name of the tag used to annotate gojq queries
-const TagName = "tags"
+// SelectTag is the name of the tag used to annotate gojq queries
+const SelectTag = "select"
 
 func queryJSON(data, query string) (interface{}, error) {
 	parser, err := gojq.NewStringQuery(data)
@@ -34,12 +34,12 @@ func setField(fieldNr int, value interface{}, instance *reflect.Value) error {
 	return nil
 }
 
-// Parse parses a reflect.Type
-func Parse(t reflect.Type, data string) (value reflect.Value, err error) {
+// Select selects a field from JSON based on the tags
+func Select(t reflect.Type, data string) (value reflect.Value, err error) {
 	value = reflect.New(t)
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
-		tagValue, ok := field.Tag.Lookup(TagName)
+		tagValue, ok := field.Tag.Lookup(SelectTag)
 		if !ok {
 			continue
 		}
