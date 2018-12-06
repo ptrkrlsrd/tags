@@ -53,7 +53,7 @@ const carData = `
 
 func TestSelectFail(t *testing.T) {
 	ty := reflect.TypeOf(Car{})
-	_, err := Select(ty, personData)
+	_, err := Select(ty, carData)
 
 	if err == nil {
 		t.Fail()
