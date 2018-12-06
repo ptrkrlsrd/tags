@@ -26,6 +26,6 @@ const carData = `
 func main() {
 	ty := reflect.TypeOf(Car{})
 	carValue, err := Select(ty, personData)
-  car := carValue.Interface().(*Car)
+  	car := carValue.Interface().(*Car)
 }
 ```
