@@ -29,3 +29,13 @@ func main() {
   	car := carValue.Interface().(*Car)
 }
 ```
+
+
+### Benchmark (Obviously using tags is slower)
+
+```
+goos: linux
+goarch: amd64
+BenchmarkSelect100-8     	    5000	    623404 ns/op
+BenchmarkNoSelect100-8   	  200000	      6378 ns/op
+```

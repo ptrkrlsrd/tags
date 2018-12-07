@@ -1,11 +1,12 @@
 package tags
 
 import (
+	"encoding/json"
 	"reflect"
 	"testing"
 )
 
-const personData = `
+const personData string = `
 {
 	"persons": [
 		{ "name": "Person", "age": 10}
@@ -43,7 +44,7 @@ type Car struct {
 	Gears int    `json:"gears" select:"cars.[1].gears"`
 }
 
-const carData = `
+const carData string = `
 {
 	"cars": [
 		{ "name": "R8", "brand": "Audi"}
@@ -57,5 +58,24 @@ func TestSelectFail(t *testing.T) {
 
 	if err == nil {
 		t.Fail()
+	}
+}
+
+func BenchmarkSelect100(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		ty := reflect.TypeOf(Person{})
+		val, _ := Select(ty, personData)
+		_ = val.Interface().(*Person)
+	}
+}
+
+func BenchmarkNoSelect100(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		var persons struct {
+			Persons []Person
+		}
+		json.Unmarshal([]byte(personData), &persons)
+		person := persons.Persons[0]
+		_ = person
 	}
 }
