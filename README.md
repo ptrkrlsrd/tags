@@ -31,7 +31,7 @@ func main() {
 ```
 
 
-### Benchmark (Obviously using tags is slower)
+### Benchmark
 
 ```
 goos: linux
