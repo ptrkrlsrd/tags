@@ -23,6 +23,7 @@ func queryJSON(data, query string) (interface{}, error) {
 	return result, err
 }
 
+// TODO: Allow more types
 func setField(fieldNr int, value interface{}, instance *reflect.Value) error {
 	switch value.(type) {
 	case string:
