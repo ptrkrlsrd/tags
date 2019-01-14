@@ -4,7 +4,6 @@
 
 
 ## Usage
-
 ### Example based on the tests
 ``` go
 package main
